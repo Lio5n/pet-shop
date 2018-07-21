@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue List</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div v-for="(item,index) of list"
+         :key="item.id">
+        {{item.text}} -- {{index}}
+    </div>
+    <p>=========================</p>
+    <template v-for="(item,index) of list"
+         :key="item.id">
+        <div>{{item.text}} --- {{index}}</div>
+        <span>{{item.text}}</span>
+    </template>
+    <p>=========================</p>
+    <div v-for="(key,item,index) of userInfo">
+        {{key}} --- {{item}} --- {{index}}
+    </div>
+</div>
+
+<script>
+    // 直接通过下标改变 list 的值，无法渲染到页面
+    // 需要使用 vue 提供的数组方法
+    // push pop shift unshift splice sort reverse
+    // 或者使用 Vue.set 方法
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: [{
+                id: "001",
+                text: "hello"
+            }, {
+                id: "002",
+                text: "dell"
+            }, {
+                id: "003",
+                text: "nice"
+            }, {
+                id: "004",
+                text: "meet"
+            }, {
+                id: "005",
+                text: "you"
+            }],
+            // 直接给对象添加值，无法渲染到页面
+            // 需要使用 vue 提供的 set 方法
+            // Vue.set 或者 实例的 set 方法
+            userInfo: {
+                name: "Dell",
+                age: 28,
+                gender: "male",
+                salary: "secret"
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
