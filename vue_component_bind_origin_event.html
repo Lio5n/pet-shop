@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bind Event</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+    <!-- 子组件上监听的是自定义事件 -->
+    <child @click="handleClick"></child>
+    <!-- 这样子监听原生事件 -->
+    <child2 @click.native="handleClick"></child2>
+</div>
+
+<script>
+    Vue.component('child', {
+        // 这里监听的是原生事件
+        template: '<div @click="handleChildClick">Child</div>',
+        methods: {
+            handleChildClick: function () {
+                alert('child click')
+                this.$emit('click')
+            }
+        }
+    })
+
+    Vue.component('child2', {
+        // 这里监听的是原生事件
+        template: '<div>Child2</div>',
+    })
+
+    var vm = new Vue({
+        el: '#root',
+        methods: {
+            handleClick: function () {
+                alert('click')
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
